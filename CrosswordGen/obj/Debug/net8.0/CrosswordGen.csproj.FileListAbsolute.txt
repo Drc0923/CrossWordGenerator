@@ -12,3 +12,4 @@ C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\obj\Debug\net8.0\refint\C
 C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\obj\Debug\net8.0\CrosswordGen.pdb
 C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\obj\Debug\net8.0\CrosswordGen.genruntimeconfig.cache
 C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\obj\Debug\net8.0\ref\CrosswordGen.dll
+C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\obj\Debug\net8.0\CrosswordGen.sourcelink.json

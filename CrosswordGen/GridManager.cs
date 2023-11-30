@@ -32,76 +32,98 @@ public class GridManager
         if (direction == "horizontal" && col + wordLength > Size) return false;
         if (direction == "vertical" && row + wordLength > Size) return false;
 
-        for (int i = 0; i < wordLength; i++)
+        for (int i = 0; i < word.Length; i++)
         {
             int currentRow = direction == "horizontal" ? row : row + i;
             int currentCol = direction == "horizontal" ? col + i : col;
+            char letter = word[i];
 
             // Check if the current position is already occupied by a different letter
-            if (Grid[currentRow, currentCol] != '.' && Grid[currentRow, currentCol] != word[i])
+            if (IsAdjacentInvalid(currentRow, currentCol, direction, letter))
                 return false;
 
-            // Check for adjacent words which would form invalid placements
-            if (IsAdjacentInvalid(currentRow, currentCol, direction))
+            // Check if placing the word here would result in invalid adjacent configurations
+            if (!IsValidIntersection(currentRow, currentCol, letter))
                 return false;
         }
 
-        return true;
+        return true; // All checks passed, word can be placed
     }
-    
-    private bool IsAdjacentInvalid(int row, int col, string direction)
+
+    private bool IsValidIntersection(int row, int col, char letter)
     {
-        // Directions to check based on current word direction
-        int[] dx = direction == "horizontal" ? new int[] { -1, 1 } : new int[] { 0, 0 };
-        int[] dy = direction == "horizontal" ? new int[] { 0, 0 } : new int[] { -1, 1 };
+        // Check if the cell is empty, which is a valid intersection point.
+        if (Grid[row, col] == '.')
+            return true;
 
-        for (int d = 0; d < 2; d++)
+        // If the cell has the same letter, it could be a valid intersection.
+        if (Grid[row, col] == letter)
         {
-            int adjacentRow = row + dx[d], adjacentCol = col + dy[d];
-
-            // Check bounds
-            if (adjacentRow < 0 || adjacentRow >= Size || adjacentCol < 0 || adjacentCol >= Size)
-                continue;
-
-            // If adjacent cell is not empty and not part of an intersecting word, it's invalid
-            if (Grid[adjacentRow, adjacentCol] != '.' && !IsValidIntersection(adjacentRow, adjacentCol, Grid[adjacentRow, adjacentCol], placedWordsInfo))
-                return true;
+            // Check if the letter is part of an existing word in the placedWordsInfo list.
+            return placedWordsInfo.Any(pwi => pwi.Word.Contains(letter) &&
+                                              ((pwi.Direction == "horizontal" && pwi.Row == row) ||
+                                               (pwi.Direction == "vertical" && pwi.Column == col)));
         }
 
+        // If the cell has a different letter, it's not a valid intersection.
         return false;
     }
 
-    
-    private bool IsValidIntersection(int row, int col, char letter, List<PlacedWordInfo> placedWords)
+    private bool FormsNewWord(int row, int col, string currentWordDirection, char letter)
     {
-        // Check if the intersecting letter is part of a word in the opposite direction
-        foreach (var placedWord in placedWords)
-        {
-            if (placedWord.Word.Contains(letter))
-            {
-                // Calculate the index of the letter in the placed word
-                int letterIndex = placedWord.Word.IndexOf(letter);
+        // Determine the direction to check for new word formation.
+        int[] rowOffsets = currentWordDirection == "horizontal" ? new int[] {-1, 1} : new int[] {0, 0};
+        int[] colOffsets = currentWordDirection == "vertical" ? new int[] {-1, 1} : new int[] {0, 0};
 
-                // Check if the intersection is at the correct position for a horizontal word
-                if (placedWord.Direction == "horizontal" && placedWord.Row == row &&
-                    col >= placedWord.Column && col < placedWord.Column + placedWord.Word.Length &&
-                    col == placedWord.Column + letterIndex)
-                {
-                    return true;
-                }
-                // Check if the intersection is at the correct position for a vertical word
-                else if (placedWord.Direction == "vertical" && placedWord.Column == col &&
-                         row >= placedWord.Row && row < placedWord.Row + placedWord.Word.Length &&
-                         row == placedWord.Row + letterIndex)
-                {
-                    return true;
-                }
+        // Check the cells before and after the current cell in the direction perpendicular to the word being placed.
+        for (int i = 0; i < 2; i++)
+        {
+            int newRow = row + rowOffsets[i];
+            int newCol = col + colOffsets[i];
+
+            // Skip the check if it's out of bounds.
+            if (newRow < 0 || newRow >= Size || newCol < 0 || newCol >= Size)
+                continue;
+
+            // If the adjacent cell has a letter, it might form a new word.
+            if (Grid[newRow, newCol] != '.')
+            {
+                return true;
             }
         }
 
-        // If no valid intersection is found with the opposite direction words, it's not valid
+        // No new words are formed.
         return false;
     }
+
+
+private bool IsAdjacentInvalid(int row, int col, string direction, char letter)
+{
+    // Check in the perpendicular direction of the word placement for any adjacent letters.
+    int dRow = direction == "horizontal" ? 1 : 0;
+    int dCol = direction == "vertical" ? 1 : 0;
+
+    // Check before and after the current position.
+    for (int d = -1; d <= 1; d += 2)
+    {
+        int newRow = row + d * dRow;
+        int newCol = col + d * dCol;
+
+        // Continue if it's out of bounds.
+        if (newRow < 0 || newRow >= Size || newCol < 0 || newCol >= Size)
+            continue;
+
+        char adjacentCell = Grid[newRow, newCol];
+        
+        // If the adjacent cell is not empty and not the same letter, and also not part of a valid intersection,
+        // it's an invalid placement as it would form a new word or extend an existing word incorrectly.
+        if (adjacentCell != '.' && adjacentCell != letter && !IsValidIntersection(newRow, newCol, adjacentCell))
+            return true;
+    }
+
+    return false;
+}
+
 
     private bool IsAdjacentToOtherWord(int row, int col, char letter)
     {

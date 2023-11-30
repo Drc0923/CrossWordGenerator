@@ -10,9 +10,10 @@ public static class WordSelection
     {
         "apple", "banana", "cherry", "date", "elderberry",
         "fig", "grape", "honeydew", "kiwi", "lemon",
-        "mango", "nectarine", "orange", "papaya", "quince",
-        "raspberry", "strawberry", "tangerine", "ugli", "vanilla",
-        "watermelon", "xigua", "yam", "zucchini"
+        "mango", "nectarine", "orange", "papaya",
+        "raspberry", "strawberry", "tangerine", "vanilla",
+        "watermelon", "yam", "zucchini", "pumpkin", "pawpaw",
+        "blueberry",
     };
 
     public static List<string> SelectRandomWords(int numWords = 5)
