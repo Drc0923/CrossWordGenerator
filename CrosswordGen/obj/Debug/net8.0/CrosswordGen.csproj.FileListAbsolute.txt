@@ -1,0 +1,14 @@
+C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\obj\Debug\net8.0\CrosswordGen.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\obj\Debug\net8.0\CrosswordGen.AssemblyInfoInputs.cache
+C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\obj\Debug\net8.0\CrosswordGen.AssemblyInfo.cs
+C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\obj\Debug\net8.0\CrosswordGen.csproj.CoreCompileInputs.cache
+C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\bin\Debug\net8.0\CrosswordGen.exe
+C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\bin\Debug\net8.0\CrosswordGen.deps.json
+C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\bin\Debug\net8.0\CrosswordGen.runtimeconfig.json
+C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\bin\Debug\net8.0\CrosswordGen.dll
+C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\bin\Debug\net8.0\CrosswordGen.pdb
+C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\obj\Debug\net8.0\CrosswordGen.dll
+C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\obj\Debug\net8.0\refint\CrosswordGen.dll
+C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\obj\Debug\net8.0\CrosswordGen.pdb
+C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\obj\Debug\net8.0\CrosswordGen.genruntimeconfig.cache
+C:\Users\Dylan\RiderProjects\CrosswordGen\CrosswordGen\obj\Debug\net8.0\ref\CrosswordGen.dll
